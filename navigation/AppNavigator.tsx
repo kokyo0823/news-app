@@ -26,7 +26,10 @@ const HomeStack = () => {
 const ClipStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Clip" component={ClipScreen}/>
+      <Stack.Screen
+        name="Clip"
+        component={ClipScreen}
+      />
     </Stack.Navigator>
   );
 };
