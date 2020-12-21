@@ -6,7 +6,7 @@ import ArticleScreen from '../screens/ArticleScreen';
 
 const Stack = createStackNavigator();
 
-const AppNavigator = () => {
+const AppNavigator:React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>

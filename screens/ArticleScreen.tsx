@@ -8,8 +8,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+type Props = {
+  route: {
+    params: {
+      article: {
+        url: string,
+      }
+    }
+  }
+}
 
-const ArticleScreen = (props: any) => {
+const ArticleScreen:React.FC<Props> = (props) => {
   const { route } = props;
   const { article } = route.params;
   return (

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ReactNode} from 'react';
 import { StyleSheet, FlatList, SafeAreaView, Alert } from 'react-native';
 import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
@@ -6,9 +6,19 @@ import axios from "axios";
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
-const HomeScreen = (props: any) => {
+type Props = {
+  navigation: any,
+}
+
+interface articles{
+  urlToImage: string,
+  title: string,
+  author: string,
+}
+
+const HomeScreen:React.FC<Props> = (props) => {
   const { navigation } = props;
-  const [articles, setArticles]: any = useState([]);
+  const [articles, setArticles] = useState<articles[]>([]);
   useEffect(() => {
     fetchArticles();
   }, []);

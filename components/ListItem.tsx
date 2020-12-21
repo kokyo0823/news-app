@@ -2,26 +2,26 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-interface AppProps {
+type Props = {
   author: string,
   imageUrl: string,
   title: string,
-  onPress: any,
+  onPress: () => void,
 }
 
-const ListItem = (props: AppProps) => {
+const ListItem: React.FC<Props> = ({ onPress,imageUrl,title,author})=> {
   return (
     <TouchableOpacity
       style={styles.itemContainer}
-      onPress={props.onPress}
+      onPress={onPress}
     >
         <View style={styles.leftContainer}>
-          <Image style={ {width: 100, height: 100,}} source={{uri: props.imageUrl}} />
+          <Image style={ {width: 100, height: 100,}} source={{uri: imageUrl}} />
         </View>
         <View style={styles.rightContainer}>
           {/* numderOfLines: 最大の行数を指定 */}
-        <Text style={styles.text} numberOfLines={3}>{props.title}</Text>
-        <Text style={styles.subText}>{props.author}</Text>
+        <Text style={styles.text} numberOfLines={3}>{title}</Text>
+        <Text style={styles.subText}>{author}</Text>
         </View>
       </TouchableOpacity>
   );
