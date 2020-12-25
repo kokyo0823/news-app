@@ -28,8 +28,7 @@ type Props = {
   route: RouteProp<RootStackParamList, "Article">;
 };
 
-const ArticleScreen: React.FC<Props> = (props) => {
-  const { route } = props;
+const ArticleScreen: React.FC<Props> = ({navigation,route}: Props) => {
   const { article } = route.params;
 
   const dispatch = useDispatch();
@@ -40,7 +39,7 @@ const ArticleScreen: React.FC<Props> = (props) => {
 
   const isClipped = () => {
     //someで配列の要素のうち特定のものを取得する
-    return clips.some((clip: any) => clip.url === article.url);
+    return clips.some((clip:any) => clip.url === article.url);
   }
   const toggleClip = () => {
     if (isClipped()) {

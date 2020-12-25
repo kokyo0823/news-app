@@ -6,8 +6,7 @@ export type AddClipAction = {
   clip: Article;
 };
 
-export const addClip = (props: any) => {
-  const { clip } = props;
+export const addClip = ({clip}: {clip:Article}) => {
   return {
     type: "ADD_CLIP",
     clip,
@@ -19,8 +18,7 @@ export type DeleteClipAction = {
   clip: Article;
 };
 
-export const deleteClip = (props: any) => {
-  const { clip } = props;
+export const deleteClip = ({clip}: {clip:Article}) => {
   return {
     type: "DELETE_CLIP",
     clip,
