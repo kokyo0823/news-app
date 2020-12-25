@@ -1,6 +1,7 @@
 import React, {useState, useEffect, ReactNode} from 'react';
 import { StyleSheet, FlatList, SafeAreaView, Alert } from 'react-native';
 import ListItem from "../components/ListItem";
+import Loading from "../components/Loading";
 import Constants from "expo-constants";
 import axios from "axios";
 import { RootStackParamList } from "../types/navigation";
@@ -23,18 +24,21 @@ interface articles{
 
 const HomeScreen: React.FC<Props> = ({navigation,route}: Props) => {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetchArticles();
   }, []);
 
   //async / await: 非同期処理の構文
   const fetchArticles = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(URL);
       setArticles(response.data.articles);
     } catch (error) {
       console.log('error');
     }
+    setLoading(false);
   }
 
   return (
@@ -51,6 +55,7 @@ const HomeScreen: React.FC<Props> = ({navigation,route}: Props) => {
           />
         )}
       />
+      {loading && <Loading />}
     </SafeAreaView>
   );
 }

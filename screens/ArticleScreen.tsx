@@ -8,7 +8,8 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../types/navigation";
 import {RouteProp} from "@react-navigation/native";
 import {State} from "../types/state";
-import {User} from "../types/user";
+import { User } from "../types/user";
+import Loading from "../components/Loading";
 
 const styles = StyleSheet.create({
   container: {
@@ -53,7 +54,7 @@ const ArticleScreen: React.FC<Props> = ({navigation,route}: Props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ClipButton onPress={toggleClip} enabled={isClipped()} />
-      <WebView source={{uri: article.url}} />
+      <WebView source={{uri: article.url}} startInLoadingState={true} renderLoading={()=> <Loading />} />
     </SafeAreaView>
   )
 };
