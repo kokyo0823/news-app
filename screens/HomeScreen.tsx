@@ -3,12 +3,17 @@ import { StyleSheet, FlatList, SafeAreaView, Alert } from 'react-native';
 import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
 import axios from "axios";
+import { RootStackParamList } from "../types/navigation";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+import { Article } from '../types/article';
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
 type Props = {
-  navigation: any,
-}
+  navigation: StackNavigationProp<RootStackParamList, "Home">;
+  route: RouteProp<RootStackParamList, "Home">;
+};
 
 interface articles{
   urlToImage: string,
@@ -16,9 +21,8 @@ interface articles{
   author: string,
 }
 
-const HomeScreen:React.FC<Props> = (props) => {
-  const { navigation } = props;
-  const [articles, setArticles] = useState<articles[]>([]);
+const HomeScreen: React.FC<Props> = ({navigation,route}: Props) => {
+  const [articles, setArticles] = useState([]);
   useEffect(() => {
     fetchArticles();
   }, []);
@@ -38,7 +42,7 @@ const HomeScreen:React.FC<Props> = (props) => {
       <FlatList
         data={articles}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
+        renderItem={({ item }: {item:Article}) => (
           <ListItem
             imageUrl={item.urlToImage}
             title={item.title}
